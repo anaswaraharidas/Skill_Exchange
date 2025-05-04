@@ -1,0 +1,281 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    
+    /* A* star theme - golden primary color */
+    --primary: 45 93% 47%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 220 13% 95%;
+    --secondary-foreground: 222 47% 11%;
+    
+    --muted: 220 13% 91%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    
+    /* A* star theme - bright accent color */
+    --accent: 45 80% 60%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 45 93% 47%;
+    
+    --radius: 0.75rem;
+
+    --skill-color: 210 40% 96%;
+    --skill-hover: 45 80% 92%;
+    
+    /* A* star theme - golden gradients */
+    --gradient-start: 45 93% 60%;
+    --gradient-mid: 45 80% 50%;
+    --gradient-end: 45 70% 40%;
+
+    /* Purple and Navy theme */
+    --purple-900: 270 50% 15%;
+    --purple-800: 270 50% 25%;
+    --purple-700: 270 50% 35%;
+    --purple-600: 270 50% 45%;
+    --purple-500: 270 50% 55%;
+    --purple-400: 270 50% 65%;
+    --purple-300: 270 50% 75%; 
+    --purple-200: 270 50% 85%;
+    --purple-100: 270 50% 95%;
+    
+    --navy-900: 240 50% 10%;
+    --navy-800: 240 50% 20%;
+    --navy-700: 240 50% 30%;
+    --navy-600: 240 50% 40%;
+    --navy-500: 240 50% 50%;
+    --navy-400: 240 50% 60%;
+    --navy-300: 240 50% 70%;
+    --navy-200: 240 50% 80%;
+    --navy-100: 240 50% 90%;
+  }
+
+  .dark {
+    /* Dark theme with purple and navy */
+    --background: 240 50% 8%;
+    --foreground: 270 50% 95%;
+    
+    --card: 240 50% 10%;
+    --card-foreground: 270 50% 95%;
+    
+    --popover: 240 50% 10%;
+    --popover-foreground: 270 50% 95%;
+    
+    /* Purple theme */
+    --primary: 270 70% 55%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 240 30% 20%;
+    --secondary-foreground: 270 50% 95%;
+    
+    --muted: 240 30% 15%;
+    --muted-foreground: 270 30% 70%;
+    
+    /* Accent color */
+    --accent: 270 70% 45%;
+    --accent-foreground: 270 50% 95%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 240 30% 25%;
+    --input: 240 30% 25%;
+    --ring: 270 70% 60%;
+
+    --skill-color: 240 50% 15%;
+    --skill-hover: 270 70% 25%;
+    
+    /* Purple/Navy gradients */
+    --gradient-start: 270 70% 40%;
+    --gradient-mid: 255 60% 30%;
+    --gradient-end: 240 50% 20%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/30;
+  }
+
+  /* Animation classes */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+  }
+
+  /* Page transitions */
+  .page-transition-enter {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .page-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+  }
+
+  .page-transition-exit {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .page-transition-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 300ms, transform 300ms;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/90 dark:bg-black/40 backdrop-blur-sm border border-white/20 shadow-sm;
+  }
+  
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .abstract-bg {
+    @apply relative overflow-hidden;
+  }
+  
+  .abstract-bg::before {
+    @apply content-[''] absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/5 to-accent/5 -z-10;
+  }
+  
+  .abstract-shape {
+    @apply absolute rounded-full bg-gradient-to-br from-primary/10 to-accent/10 blur-3xl -z-10;
+  }
+  
+  /* Star theme specific components */
+  .star-card {
+    @apply bg-white/90 dark:bg-black/40 backdrop-blur-sm border border-accent/20 shadow-sm;
+  }
+  
+  .star-icon {
+    @apply text-primary fill-primary;
+  }
+  
+  /* Replace existing gradient classes with A* star theme gradients */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-[hsl(var(--gradient-start))] via-[hsl(var(--gradient-mid))] to-[hsl(var(--gradient-end))];
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] bg-clip-text text-transparent;
+  }
+  
+  .gradient-border {
+    @apply border border-transparent bg-origin-border bg-clip-padding;
+    background-image: linear-gradient(to right, hsl(var(--background)), hsl(var(--background))), 
+                     linear-gradient(to right, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+    background-clip: padding-box, border-box;
+  }
+  
+  .gradient-button {
+    @apply relative overflow-hidden bg-gradient-to-r from-[hsl(var(--gradient-start))] to-[hsl(var(--gradient-end))] 
+           text-white hover:from-[hsl(var(--gradient-start))] hover:via-[hsl(var(--gradient-mid))] hover:to-[hsl(var(--gradient-end))];
+  }
+
+  /* Enhanced animations */
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .hover-glow {
+    @apply transition-all duration-300;
+  }
+
+  .hover-glow:hover {
+    box-shadow: 0 0 15px rgba(var(--color-accent-rgb), 0.5);
+  }
+
+  /* Purple and Navy theme specific components */
+  .purple-card {
+    @apply bg-gradient-to-br from-purple-900/80 to-navy-900/80 backdrop-blur-sm border border-purple-700/30;
+  }
+  
+  .purple-icon {
+    @apply text-purple-400;
+  }
+  
+  .purple-button {
+    @apply bg-purple-700 hover:bg-purple-600 text-white;
+  }
+  
+  .purple-gradient {
+    @apply bg-gradient-to-br from-purple-800 to-navy-900;
+  }
+  
+  .purple-gradient-text {
+    @apply bg-gradient-to-r from-purple-400 to-purple-200 bg-clip-text text-transparent;
+  }
+}
